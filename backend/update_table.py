@@ -6,18 +6,14 @@ load_dotenv()
 
 timeout = 10000
 conn = pymysql.connect(
-  charset="utf8mb4",
-  connect_timeout=timeout,
-  cursorclass=pymysql.cursors.DictCursor,
-  db="defaultdb",
-  host="spoiler-alert-spoileralert.d.aivencloud.com",
-  read_timeout=timeout,
-  port=24887,
-  user="avnadmin",
-  password= os.getenv("AIVEN_PASS"),
-  write_timeout=timeout,
+    charset="utf8mb4",
+    cursorclass=pymysql.cursors.DictCursor,
+    host="localhost",
+    user="root",
+    password=os.getenv("LocalPassword"),
+    database="test1",
+    port=3306
 )
-
 
 def update_data(table_name, set_values, key_column, key_value, conn=conn):
     cursor = conn.cursor()

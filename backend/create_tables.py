@@ -7,16 +7,15 @@ load_dotenv()
 
 timeout = 10000
 conn = pymysql.connect(
-  charset="utf8mb4",
-  connect_timeout=timeout,
-  cursorclass=pymysql.cursors.DictCursor,
-  db="defaultdb",
-  host="spoiler-alert-spoileralert.d.aivencloud.com",
-  read_timeout=timeout,
-  port=24887,
-  user="avnadmin",
-  password=os.getenv("AIVEN_PASS"),
-  write_timeout=timeout,
+    charset="utf8mb4",
+    cursorclass=pymysql.cursors.DictCursor,
+    host="localhost",
+    user="root",
+    password=os.getenv("LocalPassword"),
+    database="test1",
+    read_timeout=timeout,
+    write_timeout=timeout,
+    port=3306
 )
 
 
@@ -140,5 +139,5 @@ def reset():
 # reset()
 
 if __name__ == "__main__":
-    create_table('Wishlist', wishlist)
-    create_table('WishlistItems', wishlist_item)
+    reset()
+    print("Tables created/reset successfully.")

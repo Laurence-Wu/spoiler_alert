@@ -5,33 +5,19 @@ import os
 load_dotenv()
 
 timeout = 10000
-conn = pymysql.connect(
-  charset="utf8mb4",
-  connect_timeout=timeout,
-  cursorclass=pymysql.cursors.DictCursor,
-  db="defaultdb",
-  host="spoiler-alert-spoileralert.d.aivencloud.com",
-  read_timeout=timeout,
-  port=24887,
-  user="avnadmin",
-  password= os.getenv("AIVEN_PASS"),
-  write_timeout=timeout,
-)
-
-conn.autocommit = True
-def view_data(table_name, conn=conn):
-    conn = pymysql.connect(
-        charset="utf8mb4",
-        connect_timeout=timeout,
-        cursorclass=pymysql.cursors.DictCursor,
-        db="defaultdb",
-        host="spoiler-alert-spoileralert.d.aivencloud.com",
-        read_timeout=timeout,
-        port=24887,
-        user="avnadmin",
-        password= os.getenv("AIVEN_PASS"),
-        write_timeout=timeout,
-    )
+dataBaseName = "test1"
+def view_data(table_name, conn= None,dataBase=dataBaseName,):
+    if conn is None:     
+      conn = pymysql.connect(
+          charset="utf8mb4",
+          cursorclass=pymysql.cursors.DictCursor,
+          host="localhost",
+          user="root",
+          password=os.getenv("LocalPassword"),
+          database=dataBase,
+          port=3306
+      )
+    conn.autocommit = True
     cursor = conn.cursor()
 
     select_query = f"SELECT * FROM {table_name}"

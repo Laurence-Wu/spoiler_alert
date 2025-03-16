@@ -108,6 +108,7 @@ def login_credentials():
 def add_account():
     print("Data endpoint hit")
     data = request.get_json()
+    print(data)
     table_data = view_data('User')
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(data['password'].encode(), salt)
